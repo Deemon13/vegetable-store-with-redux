@@ -10,39 +10,23 @@ import IconIncrease from "../../../assets/Union.png";
 
 import styles from "./CartVegetableCard.module.css";
 
+// import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
+
+import type { VegetableType } from "../../type/types";
+
 interface CartVegetableCardProps {
-  cart: {
-    id: number;
-    name: string;
-    price: number;
-    image?: string;
-    category?: string;
-    amount: number;
-  }[];
-  item: {
-    id: number;
-    name: string;
-    price: number;
-    image?: string;
-    amount: number;
-  };
-  setCart: (
-    obj: {
-      id: number;
-      name: string;
-      price: number;
-      image?: string;
-      category?: string;
-      amount: number;
-    }[]
-  ) => void;
+  // cart: VegetableType[];
+  item: VegetableType;
+  // setCart: (
+  //   obj: VegetableType[]
+  // ) => void;
 }
 
 export const CartVegetableCard = ({
-  cart,
+  // cart,
   item,
-  setCart,
-}: CartVegetableCardProps) => {
+}: // setCart,
+CartVegetableCardProps) => {
   function handleIncreaseAmountCart(
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
@@ -50,16 +34,18 @@ export const CartVegetableCard = ({
       return;
     }
 
-    const vegetablesWithIncreaseAmount = cart.map((item) => {
-      if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-        return item;
-      } else {
-        item.amount += 1;
-        return item;
-      }
-    });
+    console.log(evt.target, "increase");
 
-    setCart([...vegetablesWithIncreaseAmount]);
+    // const vegetablesWithIncreaseAmount = cart.map((item) => {
+    //   if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
+    //     return item;
+    //   } else {
+    //     item.amount += 1;
+    //     return item;
+    //   }
+    // });
+
+    // setCart([...vegetablesWithIncreaseAmount]);
   }
 
   function handleDecreaseAmountCart(
@@ -69,17 +55,19 @@ export const CartVegetableCard = ({
       return;
     }
 
-    const vegetablesWithIncreaseAmount = cart.map((item) => {
-      if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-        return item;
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        item.amount <= 0 ? (item.amount = 0) : (item.amount -= 1);
-        return item;
-      }
-    });
+    console.log(evt.target, "decrease");
 
-    setCart([...vegetablesWithIncreaseAmount]);
+    // const vegetablesWithIncreaseAmount = cart.map((item) => {
+    //   if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
+    //     return item;
+    //   } else {
+    //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    //     item.amount <= 0 ? (item.amount = 0) : (item.amount -= 1);
+    //     return item;
+    //   }
+    // });
+
+    // setCart([...vegetablesWithIncreaseAmount]);
   }
   return (
     <div id={String(item.id)} className={styles["cart-vegetable-card"]}>

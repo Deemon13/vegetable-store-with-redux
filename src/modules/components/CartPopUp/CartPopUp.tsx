@@ -1,6 +1,6 @@
 import "@mantine/core/styles.css";
 
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { Popover } from "@mantine/core";
 
 import { CartListOfVegetables } from "../../components";
@@ -8,46 +8,36 @@ import { EmptyCart, CartPopupTotal } from "../../UI";
 
 import styles from "./CartPopUp.module.css";
 
-import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
+import { useTypedSelector } from "../../redux/hooks/redux";
 
-import type { VegetableType } from "../../type/types";
+// import type { VegetableType } from "../../type/types";
 
-interface CartPopUpProps {
-  cart: VegetableType[];
-  setCart: (obj: VegetableType[]) => void;
-  total: number;
-  setTotal: (total: number) => void;
-}
+// interface CartPopUpProps {
+// cart: VegetableType[];
+// setCart: (obj: VegetableType[]) => void;
+// total: number;
+// setTotal: (total: number) => void;
+// }
 
-export const CartPopUp = ({
-  cart,
-  setCart,
-  total,
-  setTotal,
-}: CartPopUpProps) => {
+export const CartPopUp = () => {
   const selectCart = useTypedSelector((state) => state.cartReducer.products);
 
-  useEffect(() => {
-    createTotalCart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
+  // useEffect(() => {
+  //   createTotalCart();
+  // }, [cart]);
 
-  function createTotalCart() {
-    const totalValueOfVegetables = cart.reduce((acc, item) => {
-      return acc + item.price * item.amount;
-    }, 0);
+  // function createTotalCart() {
+  //   const totalValueOfVegetables = selectCart.reduce((acc, item) => {
+  //     return acc + item.price * item.amount;
+  //   }, 0);
 
-    setTotal(totalValueOfVegetables);
-  }
+  //   setTotal(totalValueOfVegetables);
+  // }
 
   return (
     <Popover.Dropdown className={styles.popup}>
-      {selectCart.length > 0 ? (
-        <CartListOfVegetables cart={cart} setCart={setCart} />
-      ) : (
-        <EmptyCart />
-      )}
-      {total > 0 && <CartPopupTotal total={total} />}
+      {selectCart.length > 0 ? <CartListOfVegetables /> : <EmptyCart />}
+      <CartPopupTotal />
     </Popover.Dropdown>
   );
 };

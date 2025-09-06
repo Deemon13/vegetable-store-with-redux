@@ -6,13 +6,7 @@ import WhiteCart from "../../../assets/white-cart.png";
 
 import styles from "./CartButton.module.css";
 
-import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
-
-// import type { VegetableType } from "../../type/types";
-
-// interface CartButtonProps {
-//   cart: VegetableType[];
-// }
+import { useTypedSelector } from "../../redux/hooks/redux";
 
 export const CartButton = () => {
   const selectCart = useTypedSelector((state) => state.cartReducer.products);

@@ -2,7 +2,7 @@
 
 import "@mantine/core/styles.css";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   MantineProvider,
   createTheme,
@@ -22,7 +22,7 @@ import {
 
 import { fetchVegetables } from "../../modules/redux/reducers/VegetablesThunks";
 
-import type { VegetableType } from "../../modules/type/types";
+// import type { VegetableType } from "../../modules/type/types";
 
 const myColor: MantineColorsTuple = [
   "#eafbee",
@@ -61,11 +61,11 @@ export const App = () => {
     (state) => state.vegetableReducer.vegetables
   );
 
-  const selectCart = useTypedSelector((state) => state.cartReducer.products);
+  // const selectCart = useTypedSelector((state) => state.cartReducer.products);
 
-  const [vegetables, setVegetables] = useState<VegetableType[] | []>([]);
-  const [cart, setCart] = useState<VegetableType[] | []>([]);
-  const [total, setTotal] = useState(0);
+  // const [vegetables, setVegetables] = useState<VegetableType[] | []>([]);
+  // const [cart, setCart] = useState<VegetableType[] | []>([]);
+  // const total = 0;
 
   // const getVegetables = async () => {
   //   const newVegetables: VegetableType[] = await ky.get(url).json();
@@ -85,10 +85,10 @@ export const App = () => {
       <AppShell header={{ height: 60 }}>
         <AppShell.Header className="header">
           <Header
-            cart={cart}
-            setCart={setCart}
-            total={total}
-            setTotal={setTotal}
+          // cart={cart}
+          // setCart={setCart}
+          // total={total}
+          // setTotal={setTotal}
           />
         </AppShell.Header>
         <AppShell.Main className="main">
@@ -96,9 +96,8 @@ export const App = () => {
           {selectVegetables.length ? (
             <VegetablesList
               vegetables={selectVegetables}
-              // setVegetables={setVegetables}
-              cart={cart}
-              setCart={setCart}
+              // cart={cart}
+              // setCart={setCart}
             />
           ) : (
             <Loader />

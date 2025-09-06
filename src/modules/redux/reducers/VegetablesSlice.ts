@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { fetchVegetables } from "./VegetablesThunks";
 
-interface VegetableType {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  category?: string;
-  amount?: number;
-}
+import type { VegetableType } from "../../type/types";
+
+// interface VegetableType {
+//   id: number;
+//   name: string;
+//   price: number;
+//   image?: string;
+//   category?: string;
+//   amount?: number;
+// }
 
 interface VegetablesState {
   vegetables: VegetableType[];

@@ -7,22 +7,23 @@ import IconDecrease from "../../../assets/Rectangle 70.png";
 import IconIncrease from "../../../assets/Union.png";
 import IconCart from "../../../assets/cart.png";
 
-// import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
+import { useTypedDispatch } from "../../redux/hooks/redux";
 
-// import { increaseAmountVegetable } from "../../redux/reducers/VegetablesSlice";
+import { addToCart } from "../../redux/reducers/CartSlice";
 
 import styles from "./VegetableCard.module.css";
+// import { aM } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 
 interface VegetableTypeCard {
   id: number;
   name: string;
   price: number;
   image?: string;
-  category: string;
+  // category: string;
   // amount: number;
   // increaseAmount: React.MouseEventHandler<HTMLButtonElement>;
   // decreaseAmount: React.MouseEventHandler<HTMLButtonElement>;
-  addToCart: React.MouseEventHandler<HTMLButtonElement>;
+  // addToCart: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const VegetableCard = ({
@@ -30,12 +31,16 @@ export const VegetableCard = ({
   image,
   name,
   price,
-  // amount,
-  // increaseAmount,
-  // decreaseAmount,
-  addToCart,
-}: VegetableTypeCard) => {
+}: // amount,
+// increaseAmount,
+// decreaseAmount,
+// addToCart,
+VegetableTypeCard) => {
+  const product = { id, image, name, price };
   const [amount, setAmount] = useState(1);
+
+  const dispatch = useTypedDispatch();
+  // const selectCart = useTypedSelector((state) => state.cartReducer.products);
 
   function handleIncreaseAmount() {
     setAmount((prev) => prev + 1);
@@ -46,6 +51,10 @@ export const VegetableCard = ({
       return;
     }
     setAmount((prev) => prev - 1);
+  }
+
+  function handleAddToCart() {
+    dispatch(addToCart({ product, amount }));
   }
 
   return (
@@ -116,7 +125,7 @@ export const VegetableCard = ({
           color="#3B944E"
           mt="md"
           radius="md"
-          onClick={addToCart}
+          onClick={handleAddToCart}
           className={styles["btn-add-cart"]}
         >
           Add to cart

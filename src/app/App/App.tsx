@@ -22,6 +22,8 @@ import {
 
 import { fetchVegetables } from "../../modules/redux/reducers/VegetablesThunks";
 
+import type { VegetableType } from "../../modules/type/types";
+
 const myColor: MantineColorsTuple = [
   "#eafbee",
   "#dbf2e0",
@@ -44,20 +46,22 @@ const theme = createTheme({
 // const url =
 //   "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
 
-interface VegetableType {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  category?: string;
-  amount?: number;
-}
+// interface VegetableType {
+//   id: number;
+//   name: string;
+//   price: number;
+//   image?: string;
+//   category?: string;
+//   amount?: number;
+// }
 
 export const App = () => {
   const dispatch = useTypedDispatch();
   const selectVegetables = useTypedSelector(
     (state) => state.vegetableReducer.vegetables
   );
+
+  const selectCart = useTypedSelector((state) => state.cartReducer.products);
 
   const [vegetables, setVegetables] = useState<VegetableType[] | []>([]);
   const [cart, setCart] = useState<VegetableType[] | []>([]);
@@ -92,7 +96,7 @@ export const App = () => {
           {selectVegetables.length ? (
             <VegetablesList
               vegetables={selectVegetables}
-              setVegetables={setVegetables}
+              // setVegetables={setVegetables}
               cart={cart}
               setCart={setCart}
             />

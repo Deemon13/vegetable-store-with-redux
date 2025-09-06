@@ -1,64 +1,34 @@
 import "@mantine/core/styles.css";
 
-import { type MouseEvent } from "react";
+// import { type MouseEvent } from "react";
 import { SimpleGrid } from "@mantine/core";
 
 import { VegetableCard } from "../../modules/components";
 
+import type { VegetableType } from "../../modules/type/types";
+
 interface VegetablesListProps {
-  vegetables: {
-    id: number;
-    name: string;
-    price: number;
-    image?: string;
-    category?: string;
-    amount: number;
-  }[];
-  setVegetables: (
-    obj: {
-      id: number;
-      name: string;
-      price: number;
-      image?: string;
-      category?: string;
-      amount: number;
-    }[]
-  ) => void;
-  cart: {
-    id: number;
-    name: string;
-    price: number;
-    image?: string;
-    category?: string;
-    amount: number;
-  }[];
-  setCart: (
-    obj: {
-      id: number;
-      name: string;
-      price: number;
-      image?: string;
-      category?: string;
-      amount: number;
-    }[]
-  ) => void;
+  vegetables: VegetableType[];
+  // setVegetables: (obj: VegetableType[]) => void;
+  // cart: VegetableType[];
+  // setCart: (obj: VegetableType[]) => void;
 }
 
-interface VegetableType {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
-  category?: string;
-  amount?: number;
-}
+// interface VegetableType {
+//   id: number;
+//   name: string;
+//   price: number;
+//   image?: string;
+//   category?: string;
+//   amount?: number;
+// }
 
 export const VegetablesList = ({
   vegetables,
-  setVegetables,
-  cart,
-  setCart,
-}: VegetablesListProps) => {
+}: // setVegetables,
+// cart,
+// setCart,
+VegetablesListProps) => {
   // function handleIncreaseAmount(
   //   evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   // ) {
@@ -90,50 +60,50 @@ export const VegetablesList = ({
   //   setVegetables([...vegetablesWithIncreaseAmount]);
   // }
 
-  function handleAddToCart(
-    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
-    let newCart = [];
+  // function handleAddToCart(
+  //   evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  // ) {
+  //   let newCart = [];
 
-    const vegetableToCartId = Number(
-      (evt.target as HTMLElement).offsetParent?.id
-    );
+  //   const vegetableToCartId = Number(
+  //     (evt.target as HTMLElement).offsetParent?.id
+  //   );
 
-    const vegetableToCart: VegetableType | undefined = vegetables.find(
-      (item) => item.id === vegetableToCartId
-    );
+  //   const vegetableToCart: VegetableType | undefined = vegetables.find(
+  //     (item) => item.id === vegetableToCartId
+  //   );
 
-    if (!vegetableToCart || vegetableToCart.amount === 0) {
-      return;
-    }
+  //   if (!vegetableToCart || vegetableToCart.amount === 0) {
+  //     return;
+  //   }
 
-    if (cart.some((item) => item.id === vegetableToCartId)) {
-      const vegetableExist = cart.find((item) => item.id === vegetableToCartId);
-      const amountToAdd = vegetableToCart.amount;
+  //   if (cart.some((item) => item.id === vegetableToCartId)) {
+  //     const vegetableExist = cart.find((item) => item.id === vegetableToCartId);
+  //     const amountToAdd = vegetableToCart.amount;
 
-      if (vegetableExist) {
-        vegetableExist.amount += amountToAdd;
-      }
+  //     if (vegetableExist) {
+  //       vegetableExist.amount += amountToAdd;
+  //     }
 
-      newCart = [...cart];
-    } else {
-      newCart = [...cart, vegetableToCart];
-    }
+  //     newCart = [...cart];
+  //   } else {
+  //     newCart = [...cart, vegetableToCart];
+  //   }
 
-    setCart([...newCart]);
+  //   setCart([...newCart]);
 
-    const vegetablesWithAmount = vegetables.map((item) => {
-      if (item.id !== vegetableToCartId) {
-        return item;
-      } else {
-        const newItem = { ...item };
-        newItem.amount = 1;
-        return newItem;
-      }
-    });
+  //   const vegetablesWithAmount = vegetables.map((item) => {
+  //     if (item.id !== vegetableToCartId) {
+  //       return item;
+  //     } else {
+  //       const newItem = { ...item };
+  //       newItem.amount = 1;
+  //       return newItem;
+  //     }
+  //   });
 
-    setVegetables([...vegetablesWithAmount]);
-  }
+  //   setVegetables([...vegetablesWithAmount]);
+  // }
   return (
     <SimpleGrid
       cols={{ base: 1, sm: 2, lg: 4 }}
@@ -151,8 +121,8 @@ export const VegetablesList = ({
             // amount={amount}
             // increaseAmount={(evt) => handleIncreaseAmount(evt)}
             // decreaseAmount={(evt) => handleDecreaseAmount(evt)}
-            category={""}
-            addToCart={(evt) => handleAddToCart(evt)}
+            // category={""}
+            // addToCart={(evt) => handleAddToCart(evt)}
           />
         );
       })}

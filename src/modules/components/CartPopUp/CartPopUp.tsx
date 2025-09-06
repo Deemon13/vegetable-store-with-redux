@@ -8,25 +8,13 @@ import { EmptyCart, CartPopupTotal } from "../../UI";
 
 import styles from "./CartPopUp.module.css";
 
+import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
+
+import type { VegetableType } from "../../type/types";
+
 interface CartPopUpProps {
-  cart: {
-    id: number;
-    name: string;
-    price: number;
-    image?: string;
-    category?: string;
-    amount: number;
-  }[];
-  setCart: (
-    obj: {
-      id: number;
-      name: string;
-      price: number;
-      image?: string;
-      category?: string;
-      amount: number;
-    }[]
-  ) => void;
+  cart: VegetableType[];
+  setCart: (obj: VegetableType[]) => void;
   total: number;
   setTotal: (total: number) => void;
 }
@@ -37,6 +25,8 @@ export const CartPopUp = ({
   total,
   setTotal,
 }: CartPopUpProps) => {
+  const selectCart = useTypedSelector((state) => state.cartReducer.products);
+
   useEffect(() => {
     createTotalCart();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +42,7 @@ export const CartPopUp = ({
 
   return (
     <Popover.Dropdown className={styles.popup}>
-      {cart.length > 0 ? (
+      {selectCart.length > 0 ? (
         <CartListOfVegetables cart={cart} setCart={setCart} />
       ) : (
         <EmptyCart />

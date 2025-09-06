@@ -50,7 +50,7 @@ interface VegetableType {
   price: number;
   image?: string;
   category?: string;
-  amount: number;
+  amount?: number;
 }
 
 export const VegetablesList = ({
@@ -59,36 +59,36 @@ export const VegetablesList = ({
   cart,
   setCart,
 }: VegetablesListProps) => {
-  function handleIncreaseAmount(
-    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
-    const vegetablesWithIncreaseAmount = vegetables.map((item) => {
-      if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-        return item;
-      } else {
-        item.amount += 1;
-        return item;
-      }
-    });
+  // function handleIncreaseAmount(
+  //   evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  // ) {
+  //   const vegetablesWithIncreaseAmount = vegetables.map((item) => {
+  //     if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
+  //       return item;
+  //     } else {
+  //       item.amount += 1;
+  //       return item;
+  //     }
+  //   });
 
-    setVegetables([...vegetablesWithIncreaseAmount]);
-  }
+  //   setVegetables([...vegetablesWithIncreaseAmount]);
+  // }
 
-  function handleDecreaseAmount(
-    evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
-  ) {
-    const vegetablesWithIncreaseAmount = vegetables.map((item) => {
-      if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-        return item;
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        item.amount <= 0 ? (item.amount = 0) : (item.amount -= 1);
-        return item;
-      }
-    });
+  // function handleDecreaseAmount(
+  //   evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  // ) {
+  //   const vegetablesWithIncreaseAmount = vegetables.map((item) => {
+  //     if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
+  //       return item;
+  //     } else {
+  //       // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  //       item.amount <= 0 ? (item.amount = 0) : (item.amount -= 1);
+  //       return item;
+  //     }
+  //   });
 
-    setVegetables([...vegetablesWithIncreaseAmount]);
-  }
+  //   setVegetables([...vegetablesWithIncreaseAmount]);
+  // }
 
   function handleAddToCart(
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
@@ -140,7 +140,7 @@ export const VegetablesList = ({
       spacing={{ base: 10, sm: "md" }}
       verticalSpacing={{ base: "md", sm: "md" }}
     >
-      {vegetables.map(({ id, image, name, price, amount }) => {
+      {vegetables.map(({ id, image, name, price }) => {
         return (
           <VegetableCard
             key={id}
@@ -148,9 +148,9 @@ export const VegetablesList = ({
             image={image}
             name={name}
             price={price}
-            amount={amount}
-            increaseAmount={(evt) => handleIncreaseAmount(evt)}
-            decreaseAmount={(evt) => handleDecreaseAmount(evt)}
+            // amount={amount}
+            // increaseAmount={(evt) => handleIncreaseAmount(evt)}
+            // decreaseAmount={(evt) => handleDecreaseAmount(evt)}
             category={""}
             addToCart={(evt) => handleAddToCart(evt)}
           />

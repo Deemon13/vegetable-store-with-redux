@@ -1,4 +1,4 @@
-import ky from "ky";
+// import ky from "ky";
 
 import "@mantine/core/styles.css";
 
@@ -14,6 +14,13 @@ import "./App.css";
 
 import { Header, VegetablesList } from "../../pages";
 import { CatalogTitle, Loader } from "../../modules/UI";
+
+import {
+  useTypedDispatch,
+  useTypedSelector,
+} from "../../modules/redux/hooks/redux";
+
+import { fetchVegetables } from "../../modules/redux/reducers/VegetablesThunks";
 
 const myColor: MantineColorsTuple = [
   "#eafbee",
@@ -34,8 +41,8 @@ const theme = createTheme({
   },
 });
 
-const url =
-  "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
+// const url =
+//   "https://res.cloudinary.com/sivadass/raw/upload/v1535817394/json/products.json";
 
 interface VegetableType {
   id: number;
@@ -43,25 +50,31 @@ interface VegetableType {
   price: number;
   image?: string;
   category?: string;
-  amount: number;
+  amount?: number;
 }
 
 export const App = () => {
+  const dispatch = useTypedDispatch();
+  const selectVegetables = useTypedSelector(
+    (state) => state.vegetableReducer.vegetables
+  );
+
   const [vegetables, setVegetables] = useState<VegetableType[] | []>([]);
   const [cart, setCart] = useState<VegetableType[] | []>([]);
   const [total, setTotal] = useState(0);
 
-  const getVegetables = async () => {
-    const newVegetables: VegetableType[] = await ky.get(url).json();
-    const newVegetablesWithAmount = newVegetables.map((itm) => {
-      return { ...itm, amount: 1 };
-    });
-    setVegetables(newVegetablesWithAmount);
-  };
+  // const getVegetables = async () => {
+  //   const newVegetables: VegetableType[] = await ky.get(url).json();
+  //   const newVegetablesWithAmount = newVegetables.map((itm) => {
+  //     return { ...itm, amount: 1 };
+  //   });
+  //   setVegetables(newVegetablesWithAmount);
+  // };
 
   useEffect(() => {
-    getVegetables();
-  }, []);
+    // getVegetables();
+    dispatch(fetchVegetables());
+  }, [dispatch]);
 
   return (
     <MantineProvider theme={theme}>
@@ -76,9 +89,9 @@ export const App = () => {
         </AppShell.Header>
         <AppShell.Main className="main">
           <CatalogTitle title="Catalog" />
-          {vegetables.length ? (
+          {selectVegetables.length ? (
             <VegetablesList
-              vegetables={vegetables}
+              vegetables={selectVegetables}
               setVegetables={setVegetables}
               cart={cart}
               setCart={setCart}

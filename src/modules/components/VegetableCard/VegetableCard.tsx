@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, Image, Text, Button, Group } from "@mantine/core";
 
 import { transformNameOfVegetable } from "../../utils";
@@ -5,6 +6,10 @@ import { transformNameOfVegetable } from "../../utils";
 import IconDecrease from "../../../assets/Rectangle 70.png";
 import IconIncrease from "../../../assets/Union.png";
 import IconCart from "../../../assets/cart.png";
+
+// import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
+
+// import { increaseAmountVegetable } from "../../redux/reducers/VegetablesSlice";
 
 import styles from "./VegetableCard.module.css";
 
@@ -14,9 +19,9 @@ interface VegetableTypeCard {
   price: number;
   image?: string;
   category: string;
-  amount: number;
-  increaseAmount: React.MouseEventHandler<HTMLButtonElement>;
-  decreaseAmount: React.MouseEventHandler<HTMLButtonElement>;
+  // amount: number;
+  // increaseAmount: React.MouseEventHandler<HTMLButtonElement>;
+  // decreaseAmount: React.MouseEventHandler<HTMLButtonElement>;
   addToCart: React.MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -25,11 +30,24 @@ export const VegetableCard = ({
   image,
   name,
   price,
-  amount,
-  increaseAmount,
-  decreaseAmount,
+  // amount,
+  // increaseAmount,
+  // decreaseAmount,
   addToCart,
 }: VegetableTypeCard) => {
+  const [amount, setAmount] = useState(1);
+
+  function handleIncreaseAmount() {
+    setAmount((prev) => prev + 1);
+  }
+
+  function handleDecreaseAmount() {
+    if (amount <= 1) {
+      return;
+    }
+    setAmount((prev) => prev - 1);
+  }
+
   return (
     <Card id={String(id)} shadow="sm" padding="md" radius="lg" withBorder>
       <Card.Section className={styles["vegetable-img-wrapper"]}>
@@ -62,18 +80,19 @@ export const VegetableCard = ({
             color="gray"
             size="xs"
             radius="md"
-            onClick={decreaseAmount}
+            onClick={handleDecreaseAmount}
             className={styles["btn-decrease-amount-list"]}
           >
             <img src={IconDecrease} width={10} />
           </Button>
           <span className={styles["vegetable-amount"]}>{amount}</span>
+          {/* <span className={styles["vegetable-amount"]}>{amount}</span> */}
           <Button
             variant="filled"
             color="gray"
             size="xs"
             radius="md"
-            onClick={increaseAmount}
+            onClick={handleIncreaseAmount}
             className={styles["btn-increase-amount-list"]}
           >
             <img src={IconIncrease} width={10} />

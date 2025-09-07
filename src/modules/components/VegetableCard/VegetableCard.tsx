@@ -43,6 +43,7 @@ export const VegetableCard = ({
 
   function handleAddToCart() {
     dispatch(addToCart({ product, amount }));
+    setAmount(1);
   }
 
   return (
@@ -97,12 +98,13 @@ export const VegetableCard = ({
       </Group>
 
       <Group
+        gap="xs"
         justify="space-between"
         mt="md"
         mb="xs"
         className={styles["vegetable-adding-cart"]}
       >
-        <Text size="sm" c="dimmed">
+        <Text size="xs" c="dimmed">
           <span className={styles["vegetable-price"]}>$ {price}</span>
         </Text>
 
@@ -110,6 +112,7 @@ export const VegetableCard = ({
           id={String(id)}
           variant="light"
           color="#3B944E"
+          size="sm"
           mt="md"
           radius="md"
           onClick={handleAddToCart}

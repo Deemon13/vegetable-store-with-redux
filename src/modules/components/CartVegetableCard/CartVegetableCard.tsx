@@ -5,7 +5,11 @@ import { Button } from "@mantine/core";
 import type { CartVegetableType } from "../../type/types";
 
 import { useTypedDispatch } from "../../redux/hooks/redux";
-import { increaseAmount, decreaseAmount } from "../../redux/reducers/CartSlice";
+import {
+  increaseAmount,
+  decreaseAmount,
+  removeProduct,
+} from "../../redux/reducers/CartSlice";
 
 import { transformNameOfVegetable } from "../../../modules/utils";
 
@@ -38,6 +42,7 @@ export const CartVegetableCard = ({ item }: CartVegetableCardProps) => {
     }
 
     if (item.amount <= 1) {
+      dispatch(removeProduct(item));
       return;
     }
 

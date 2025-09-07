@@ -3,13 +3,10 @@ export interface VegetableType {
   name: string;
   price: number;
   image?: string;
-  category?: string;
-  amount?: number;
+  // category?: string;
+  // amount?: number;
 }
-export interface CartVegetableType {
-  id: number;
-  name: string;
-  price: number;
-  image?: string;
+export interface CartVegetableType extends VegetableType {
+  // item: VegetableType;
   amount: number;
 }

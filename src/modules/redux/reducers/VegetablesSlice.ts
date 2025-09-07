@@ -17,14 +17,7 @@ const initialState: VegetablesState = {
 export const vegetablesSlice = createSlice({
   name: "vegetables",
   initialState,
-  reducers: {
-    findVegetable(state, action) {
-      const findedVegetable = state.vegetables.find(
-        (item) => item.id === action.payload.id
-      );
-      console.log(findedVegetable);
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchVegetables.pending, (state) => {
@@ -40,5 +33,4 @@ export const vegetablesSlice = createSlice({
   },
 });
 
-export const { findVegetable } = vegetablesSlice.actions;
 export default vegetablesSlice.reducer;

@@ -1,7 +1,11 @@
 import "@mantine/core/styles.css";
-
 import { type MouseEvent } from "react";
 import { Button } from "@mantine/core";
+
+import type { CartVegetableType } from "../../type/types";
+
+import { useTypedDispatch } from "../../redux/hooks/redux";
+import { increaseAmount, decreaseAmount } from "../../redux/reducers/CartSlice";
 
 import { transformNameOfVegetable } from "../../../modules/utils";
 
@@ -10,23 +14,12 @@ import IconIncrease from "../../../assets/Union.png";
 
 import styles from "./CartVegetableCard.module.css";
 
-// import { useTypedDispatch, useTypedSelector } from "../../redux/hooks/redux";
-
-import type { VegetableType } from "../../type/types";
-
 interface CartVegetableCardProps {
-  // cart: VegetableType[];
-  item: VegetableType;
-  // setCart: (
-  //   obj: VegetableType[]
-  // ) => void;
+  item: CartVegetableType;
 }
 
-export const CartVegetableCard = ({
-  // cart,
-  item,
-}: // setCart,
-CartVegetableCardProps) => {
+export const CartVegetableCard = ({ item }: CartVegetableCardProps) => {
+  const dispatch = useTypedDispatch();
   function handleIncreaseAmountCart(
     evt: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
@@ -34,18 +27,7 @@ CartVegetableCardProps) => {
       return;
     }
 
-    console.log(evt.target, "increase");
-
-    // const vegetablesWithIncreaseAmount = cart.map((item) => {
-    //   if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-    //     return item;
-    //   } else {
-    //     item.amount += 1;
-    //     return item;
-    //   }
-    // });
-
-    // setCart([...vegetablesWithIncreaseAmount]);
+    dispatch(increaseAmount(item));
   }
 
   function handleDecreaseAmountCart(
@@ -55,20 +37,13 @@ CartVegetableCardProps) => {
       return;
     }
 
-    console.log(evt.target, "decrease");
+    if (item.amount <= 1) {
+      return;
+    }
 
-    // const vegetablesWithIncreaseAmount = cart.map((item) => {
-    //   if (item.id !== Number((evt.target as HTMLElement).offsetParent?.id)) {
-    //     return item;
-    //   } else {
-    //     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    //     item.amount <= 0 ? (item.amount = 0) : (item.amount -= 1);
-    //     return item;
-    //   }
-    // });
-
-    // setCart([...vegetablesWithIncreaseAmount]);
+    dispatch(decreaseAmount(item));
   }
+
   return (
     <div id={String(item.id)} className={styles["cart-vegetable-card"]}>
       <img src={item.image} width="64" height="64" alt="vegetable-image" />

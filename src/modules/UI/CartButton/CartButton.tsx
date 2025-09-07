@@ -1,12 +1,11 @@
 import "@mantine/core/styles.css";
-
 import { Popover, Button } from "@mantine/core";
+
+import { useTypedSelector } from "../../redux/hooks/redux";
 
 import WhiteCart from "../../../assets/white-cart.png";
 
 import styles from "./CartButton.module.css";
-
-import { useTypedSelector } from "../../redux/hooks/redux";
 
 export const CartButton = () => {
   const selectCart = useTypedSelector((state) => state.cartReducer.products);

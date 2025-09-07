@@ -4,15 +4,6 @@ import { fetchVegetables } from "./VegetablesThunks";
 
 import type { VegetableType } from "../../type/types";
 
-// interface VegetableType {
-//   id: number;
-//   name: string;
-//   price: number;
-//   image?: string;
-//   category?: string;
-//   amount?: number;
-// }
-
 interface VegetablesState {
   vegetables: VegetableType[];
   isLoading: boolean;
@@ -33,21 +24,6 @@ export const vegetablesSlice = createSlice({
       );
       console.log(findedVegetable);
     },
-    // increaseAmountVegetable(state, action) {
-    //   const { id } = action.payload;
-
-    //   console.log(id);
-
-    //   const vegetableForIncrease = state.vegetables.find(
-    //     (item) => item.id === id
-    //   );
-    //   console.log(vegetableForIncrease);
-    // return {
-    //   ...state.vegetables,
-    // amount: Number(vegetableForIncrease?.amount) + 1,
-    // };
-    // console.log(findedVegetable);
-    // },
   },
   extraReducers: (builder) => {
     builder

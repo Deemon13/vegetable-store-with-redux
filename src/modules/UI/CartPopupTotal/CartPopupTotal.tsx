@@ -1,11 +1,8 @@
-import styles from "./CartPopupTotal.module.css";
-
-import { useTypedSelector } from "../../redux/hooks/redux";
 import { useEffect, useState } from "react";
 
-// interface CartPopupTotalProps {
-//   total: number;
-// }
+import { useTypedSelector } from "../../redux/hooks/redux";
+
+import styles from "./CartPopupTotal.module.css";
 
 export const CartPopupTotal = () => {
   const selectCart = useTypedSelector((state) => state.cartReducer.products);
@@ -18,8 +15,6 @@ export const CartPopupTotal = () => {
             return acc + item.price * (item.amount || 0);
           }, 0)
         : 0;
-
-      // setTotal(totalValueOfVegetables);
     }
     setTotal(createTotalCart());
   }, [selectCart]);

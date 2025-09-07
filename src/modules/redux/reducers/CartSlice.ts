@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import type { VegetableType } from "../../type/types";
+import type { CartVegetableType } from "../../type/types";
 
 interface CartState {
-  products: VegetableType[];
+  products: CartVegetableType[];
 }
 
 const initialState: CartState = {
@@ -27,8 +27,30 @@ const cartSlice = createSlice({
         state.products.push({ ...product, amount });
       }
     },
+    increaseAmount: (state, action) => {
+      const product = action.payload;
+
+      state.products.map((item) => {
+        if (item.id === product.id) {
+          return { amount: (item.amount += 1) };
+        } else {
+          return item;
+        }
+      });
+    },
+    decreaseAmount: (state, action) => {
+      const product = action.payload;
+
+      state.products.map((item) => {
+        if (item.id === product.id) {
+          return { amount: (item.amount -= 1) };
+        } else {
+          return item;
+        }
+      });
+    },
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, increaseAmount, decreaseAmount } = cartSlice.actions;
 export default cartSlice.reducer;

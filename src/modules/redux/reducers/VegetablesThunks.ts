@@ -5,7 +5,7 @@ const url =
 
 export const fetchVegetables = createAsyncThunk(
   "vegetables/fetchVegetables",
-  async function (_, { rejectWithValue }) {
+  async function () {
     try {
       const response = await fetch(url);
 
@@ -17,7 +17,7 @@ export const fetchVegetables = createAsyncThunk(
 
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      console.error(error);
     }
   }
 );

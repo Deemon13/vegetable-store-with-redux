@@ -3,27 +3,20 @@ import { Card, Image, Text, Button, Group } from "@mantine/core";
 
 import { transformNameOfVegetable } from "../../utils";
 
+import { useTypedDispatch } from "../../redux/hooks/redux";
+import { addToCart } from "../../redux/reducers/CartSlice";
+
 import IconDecrease from "../../../assets/Rectangle 70.png";
 import IconIncrease from "../../../assets/Union.png";
 import IconCart from "../../../assets/cart.png";
 
-import { useTypedDispatch } from "../../redux/hooks/redux";
-
-import { addToCart } from "../../redux/reducers/CartSlice";
-
 import styles from "./VegetableCard.module.css";
-// import { aM } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
 
 interface VegetableTypeCard {
   id: number;
   name: string;
   price: number;
   image?: string;
-  // category: string;
-  // amount: number;
-  // increaseAmount: React.MouseEventHandler<HTMLButtonElement>;
-  // decreaseAmount: React.MouseEventHandler<HTMLButtonElement>;
-  // addToCart: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const VegetableCard = ({
@@ -31,16 +24,11 @@ export const VegetableCard = ({
   image,
   name,
   price,
-}: // amount,
-// increaseAmount,
-// decreaseAmount,
-// addToCart,
-VegetableTypeCard) => {
+}: VegetableTypeCard) => {
   const product = { id, image, name, price };
   const [amount, setAmount] = useState(1);
 
   const dispatch = useTypedDispatch();
-  // const selectCart = useTypedSelector((state) => state.cartReducer.products);
 
   function handleIncreaseAmount() {
     setAmount((prev) => prev + 1);
@@ -95,7 +83,6 @@ VegetableTypeCard) => {
             <img src={IconDecrease} width={10} />
           </Button>
           <span className={styles["vegetable-amount"]}>{amount}</span>
-          {/* <span className={styles["vegetable-amount"]}>{amount}</span> */}
           <Button
             variant="filled"
             color="gray"

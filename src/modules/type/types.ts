@@ -6,3 +6,10 @@ export interface VegetableType {
   category?: string;
   amount?: number;
 }
+export interface CartVegetableType {
+  id: number;
+  name: string;
+  price: number;
+  image?: string;
+  amount: number;
+}
